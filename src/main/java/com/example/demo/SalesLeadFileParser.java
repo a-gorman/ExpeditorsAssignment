@@ -23,7 +23,7 @@ public class SalesLeadFileParser {
         // Eager evaluation might be inappropriate if files are very large.
         // Leaving things to operate on steams alleviates that pain in most cases
         return inputStream
-                .map(entry -> Arrays.asList(entry.split(",")))
+                .map(entry -> Arrays.asList(entry.replace("\"","").split(",")))
                 .map(this::EntryToLead)
                 .sequential()
                 .collect(Collectors.toList());
