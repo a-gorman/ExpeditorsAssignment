@@ -46,7 +46,7 @@ public class SalesLeadFileParser {
                 columns.get(1).toLowerCase(), // Last Name
                 RegularizeAddress(columns.get(2)), // street Address
                 columns.get(3).toLowerCase(), // City
-                columns.get(4).toLowerCase(), // State
+                columns.get(4).toUpperCase(), // State
                 Integer.parseInt(columns.get(5))  // Age
         );
     }

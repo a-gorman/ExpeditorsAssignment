@@ -26,7 +26,7 @@ public class SaleLeadFileParserTests {
         var input = String.format("\"%1$s\",\"Smith\",\"123 main st.\",\"seattle\",\"wa\",\"43\"", nameInput).lines();
 
         var result = new SalesLeadFileParser().parse(input);
-        assertThat(result.get(0).firstName()).isEqualTo(expectedValue);
+        assertThat(expectedValue).isEqualTo(result.get(0).firstName());
     }
 
     @ParameterizedTest
@@ -41,26 +41,64 @@ public class SaleLeadFileParserTests {
         var input = String.format("\"Dave\",\"%1$s\",\"123 main st.\",\"seattle\",\"wa\",\"43\"", nameInput).lines();
 
         var result = new SalesLeadFileParser().parse(input);
-        assertThat(result.get(0).lastName()).isEqualTo(expectedValue);
+        assertThat(expectedValue).isEqualTo(result.get(0).lastName());
     }
 
     @ParameterizedTest
-    @CsvSource( value = {
+    @CsvSource(value = {
             "123 main st.,123 main st",
             "123 Main St.,123 main st",
             "234 2nd Ave.,234 2nd ave",
             "234 2nd Ave,234 2nd ave",
-            "234 2nd Ave.,234 2nd ave",
-            "234 2nd Ave.,234 2nd ave",
             "345 3rd Blvd., Apt. 200,345 3rd blvd, apt 200",
             "345 3rd Blvd. Apt. 200,345 3rd blvd apt 200",
-            "'123 main st ',123 main st ",
+            "'123 main st ',123 main st",
             "123 Main St.,123 main st",
     })
     public void Parser_Should_CorrectlyParse_Address(String address, String expectedValue) {
         var input = String.format("\"Dave\",\"Smith\",\"%1$s\",\"seattle\",\"wa\",\"43\"", address).lines();
 
         var result = new SalesLeadFileParser().parse(input);
-        assertThat(result.get(0).streetAddress()).isEqualTo(expectedValue);
+        assertThat(expectedValue).isEqualTo(result.get(0).streetAddress());
+    }
+
+
+    @ParameterizedTest
+    @CsvSource( value = {
+            "seattle,seattle",
+            "SeaTtLe,seattle"
+    })
+    public void Parser_Should_CorrectlyParse_City(String city, String expectedValue) {
+        var input = String.format("\"Dave\",\"Smith\",\"123 main st.\",\"%1$s\",\"wa\",\"43\"", city).lines();
+
+        var result = new SalesLeadFileParser().parse(input);
+        assertThat(expectedValue).isEqualTo(result.get(0).city());
+    }
+
+    @ParameterizedTest
+    @CsvSource( value = {
+            "wa,WA",
+            "WA,WA",
+            "Fl,FL",
+    })
+    public void Parser_Should_CorrectlyParse_State(String state, String expectedValue) {
+        var input = String.format("\"Dave\",\"Smith\",\"123 main st.\",\"seattle\",\"%1$s\",\"43\"", state).lines();
+
+        var result = new SalesLeadFileParser().parse(input);
+        assertThat(expectedValue).isEqualTo(result.get(0).state());
+    }
+
+
+    @ParameterizedTest
+    @CsvSource( value = {
+            "12,12",
+            "1,1",
+            "0,0"
+    })
+    public void Parser_Should_CorrectlyParse_Age(String age, int expectedValue) {
+        var input = String.format("\"Dave\",\"Smith\",\"123 main st.\",\"seattle\",\"wa\",\"%1$s\"", age).lines();
+
+        var result = new SalesLeadFileParser().parse(input);
+        assertThat(expectedValue).isEqualTo(result.get(0).ageInYears());
     }
 }
