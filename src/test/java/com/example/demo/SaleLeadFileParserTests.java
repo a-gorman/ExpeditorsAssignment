@@ -44,16 +44,19 @@ public class SaleLeadFileParserTests {
         assertThat(expectedValue).isEqualTo(result.get(0).lastName());
     }
 
+    // There are certainly many types of pathological inputs we could imagine that will break our parser (ex. repeated
+    // whitespace should likely be stripped). We could easily add test cases here before fixing those cases.
     @ParameterizedTest
     @CsvSource(value = {
             "123 main st.,123 main st",
             "123 Main St.,123 main st",
             "234 2nd Ave.,234 2nd ave",
             "234 2nd Ave,234 2nd ave",
-            "345 3rd Blvd., Apt. 200,345 3rd blvd, apt 200",
+            "'345 3rd Blvd., Apt. 200',345 3rd blvd apt 200",
             "345 3rd Blvd. Apt. 200,345 3rd blvd apt 200",
             "'123 main st ',123 main st",
             "123 Main St.,123 main st",
+            "',123 Main St.,',123 main st",
     })
     public void Parser_Should_CorrectlyParse_Address(String address, String expectedValue) {
         var input = String.format("\"Dave\",\"Smith\",\"%1$s\",\"seattle\",\"wa\",\"43\"", address).lines();

@@ -3,7 +3,7 @@ This project is created to complete an interview exercise for Expediters. The pr
 In this project I decided to create a simple Spring Boot project to demonstrate how I might create a simple module in
 an enterprise web-server code base. I use comments to provide commentary calling attention to places where a "real"
 integrated module could benefit from additional effort or complexity, but have elided such effort in the context of this
-exercise.
+exercise. Normally I would not add nearly so many comments!
 
 
 The program is a command line program with the following interface:

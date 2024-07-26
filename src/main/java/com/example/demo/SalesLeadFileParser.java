@@ -23,9 +23,8 @@ public class SalesLeadFileParser {
         // Eager evaluation might be inappropriate if files are very large.
         // Leaving things to operate on steams alleviates that pain in most cases
         return inputStream
-                .map(entry -> Arrays.asList(entry.replace("\"","").split(",")))
+                .map(entry -> Arrays.asList(entry.split("^\"|\",\"|\"$")))
                 .map(this::EntryToLead)
-                .sequential()
                 .collect(Collectors.toList());
     }
 
@@ -42,12 +41,12 @@ public class SalesLeadFileParser {
         // Making everything lower case might not be appropriate if we want to capture the original data exactly. Often,
         // regularizing the data and handling casing on the front end can make things easier for the backend.
         return new SalesLead(
-                columns.get(0).toLowerCase(), // First Name
-                columns.get(1).toLowerCase(), // Last Name
-                RegularizeAddress(columns.get(2)), // street Address
-                columns.get(3).toLowerCase(), // City
-                columns.get(4).toUpperCase(), // State
-                Integer.parseInt(columns.get(5))  // Age
+                columns.get(1).toLowerCase(), // First Name
+                columns.get(2).toLowerCase(), // Last Name
+                RegularizeAddress(columns.get(3)), // street Address
+                columns.get(4).toLowerCase(), // City
+                columns.get(5).toUpperCase(), // State
+                Integer.parseInt(columns.get(6))  // Age
         );
     }
 
@@ -55,8 +54,10 @@ public class SalesLeadFileParser {
     // additional testing seam. Here things are simple enough that testing will still be pretty easy.
     // Address are a bit tricky since people can type dots after abbreviation.
     private String RegularizeAddress(String address) {
-
-        // I imagine there would be more rules here, like st -> street, which justifies making it its own method
-        return address.replace(".", "").toLowerCase();
+        return address
+                .replace(".", "")
+                .replace(",", "")
+                .trim()
+                .toLowerCase();
     }
 }
