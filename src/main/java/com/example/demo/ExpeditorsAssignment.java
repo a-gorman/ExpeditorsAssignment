@@ -13,8 +13,11 @@ public class ExpeditorsAssignment implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        for (String arg : args) {
-            System.out.println(arg);
+        // We can use or create a more meaningful exception type if we want
+        if(args.length < 1) {
+            throw new Exception("An input file path must be specified");
         }
+        var inputFilePath = args[0];
+        var outputFilePath = args.length > 1 ? args[1] : null;
     }
 }
