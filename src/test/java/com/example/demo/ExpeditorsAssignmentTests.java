@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -58,5 +56,25 @@ public class ExpeditorsAssignmentTests {
                 && result.get(2).givenName().equals("a") && result.get(2).surname().equals("y")
                 && result.get(3).givenName().equals("b") && result.get(3).surname().equals("y"))
         );
+    }
+
+    @Test
+    public void household_sizes_areCalculatedCorrectly() throws Exception {
+        when(parser.parse(any())).thenReturn(List.of(
+                new SalesLead("a", "x", "address1", "city1", "state1", 50),
+                new SalesLead("b", "x", "address1", "city1", "state1", 1),
+                new SalesLead("a", "y", "address2", "city1", "state1", 50),
+                new SalesLead("b", "y", "address1", "city2", "state1", 50),
+                new SalesLead("b", "y", "address1", "city1", "state2", 50)
+        ));
+
+        assignmentClass.run("-s", "inputString");
+
+        verify(formatter).WriteHouseholdSizesToString(argThat(houseHolds ->
+                houseHolds.get("address1,city1,state1").equals(2)
+                && houseHolds.get("address2,city1,state1").equals(1)
+                && houseHolds.get("address1,city2,state1").equals(1)
+                && houseHolds.get("address1,city1,state2").equals(1)
+        ));
     }
 }
