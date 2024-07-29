@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Component
 // This class is awkward, maybe due to the nature of this being a toy problem that would be better as a small
