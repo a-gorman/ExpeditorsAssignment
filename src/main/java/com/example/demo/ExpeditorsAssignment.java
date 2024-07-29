@@ -59,10 +59,9 @@ public class ExpeditorsAssignment implements CommandLineRunner {
                 .sorted(Comparator.comparing(SalesLead::surname).thenComparing(SalesLead::givenName))
                 .toList();
 
-        var output = String.format("Households:\n%s\n\nLeads:%s",
+        var output = String.format("Households:\n%s\n\nLeads:\n%s",
                 formatter.WriteHouseholdSizesToString(CalculateHouseholdSizes(leads)),
                 formatter.WriteLeadsToString(adultSortedLeads));
-
 
         // We could add some validation that the file paths are valid and are in areas we want to user to write to.
         var outputFilePath = args.length > 2 ? args[2] : null;
@@ -71,7 +70,7 @@ public class ExpeditorsAssignment implements CommandLineRunner {
                 writer.write(output);
             }
         } else {
-            System.out.println(output);
+            System.out.print(output);
         }
     }
 
