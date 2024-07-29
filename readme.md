@@ -14,10 +14,8 @@ The program is a command line program with the following interface:
 Arg0: Indicates if the first argument should be parsed, or if it takes a csv file to be parsed instead.
 
 Arg1: Function depends on arg0:
-
-    -f: File path to input file that must be parsed. This argument is required. The file must be a CSV in the form given in the assignment prompt.
-
-    -s: Input is a string to be parsed directly. Must be in CSV in the form given in the assignment prompt.
+- `-f`: File path to input file that must be parsed. This argument is required. The file must be a CSV in the form given in the assignment prompt.
+- `-s`: Input is a string to be parsed directly. Must be in CSV in the form given in the assignment prompt.
 
 Arg2: Output file path. This argument is optional. If not provided, the output is sent to the terminal.
 
