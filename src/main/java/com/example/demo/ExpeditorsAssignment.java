@@ -56,7 +56,7 @@ public class ExpeditorsAssignment implements CommandLineRunner {
 
         var adultSortedLeads = leads.stream()
                 .filter(lead -> lead.ageInYears() > 18)
-                .sorted(Comparator.comparing(SalesLead::givenName).thenComparing(SalesLead::surname))
+                .sorted(Comparator.comparing(SalesLead::surname).thenComparing(SalesLead::givenName))
                 .toList();
 
         var output = String.format("Households:\n%s\n\nLeads:%s",
