@@ -1,3 +1,5 @@
+# Introduction
+
 This project is created to complete an interview exercise for Expediters. The prompt is listed below.
 
 In this project I decided to create a simple Spring Boot project to demonstrate how I might create a simple module in
@@ -5,6 +7,7 @@ an enterprise web-server code base. I use comments to provide commentary calling
 integrated module could benefit from additional effort or complexity, but have elided such effort in the context of this
 exercise. Normally I would not add nearly so many comments!
 
+# How to run
 
 The program is a command line program with the following interface:
 Arg0: Indicates if the first argument should be parsed, or if it takes a csv file to be parsed instead.
@@ -13,9 +16,14 @@ Arg1: Function depends on arg0:
     -s: Input is a string to be parsed directly. Must be in CSV in the form given in the assignment prompt.
 Arg2: Output file path. This argument is optional. If not provided, the output is sent to the terminal.
 
+## Quick start with IntelliJ
 
+Edit the run configuration, then click "modify options", select "program arguments", then use the following argument:
+`-f src/main/resources/ExampleInput.csv`
 
-The given prompt is:
+![img.png](img.png)
+
+# Prompt:
 
 Exercise Summary:
 This Developer Design and Development exercise is used in the evaluation process for potential new hire candidates.  Please approach this exercise as you would approach a design and development project at work and include unit tests.  Any documentation or explanations about your approach and assumptions are helpful.  Please post your completed exercise on Github and send a link back to your recruiting contact at Expeditors when complete.
