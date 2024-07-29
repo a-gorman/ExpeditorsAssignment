@@ -2,6 +2,7 @@ package com.example.demo;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -38,5 +39,24 @@ public class ExpeditorsAssignmentTests {
 
         var shouldPrint = age > 18;
         verify(formatter).WriteLeadsToString(argThat(x -> (x.isEmpty()) != shouldPrint));
+    }
+
+    @Test
+    public void occupants_areSorted_BySurname_ThenGivenName() throws Exception {
+        when(parser.parse(any())).thenReturn(List.of(
+                new SalesLead("a", "x", "address", "city", "state", 50),
+                new SalesLead("b", "x", "address", "city", "state", 50),
+                new SalesLead("a", "y", "address", "city", "state", 50),
+                new SalesLead("b", "y", "address", "city", "state", 50)
+        ));
+
+        assignmentClass.run("-s", "inputString");
+
+        verify(formatter).WriteLeadsToString(argThat(result ->
+                result.get(0).givenName().equals("a") && result.get(0).surname().equals("x")
+                && result.get(1).givenName().equals("b") && result.get(1).surname().equals("x")
+                && result.get(2).givenName().equals("a") && result.get(2).surname().equals("y")
+                && result.get(3).givenName().equals("b") && result.get(3).surname().equals("y"))
+        );
     }
 }
