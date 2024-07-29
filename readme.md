@@ -28,9 +28,9 @@ Edit the run configuration, then click "modify options", select "program argumen
 
 # I trust it works, just show me the output!
 
-Simply open the file `ExampleOutput.txt` in the root directory. Alternativly, see the picture below on github:
+Simply open the file `ExampleOutput.txt` in the root directory. Alternatively, see the picture below:
 
-![image](https://github.com/user-attachments/assets/1bc9bd98-35a0-4c3d-a9fd-a4e134e64cbd)
+![img_2.png](img_2.png)
 
 # Prompt:
 

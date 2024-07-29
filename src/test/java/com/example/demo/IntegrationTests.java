@@ -22,12 +22,12 @@ class IntegrationTests {
                     2:\t345 3rd blvd apt 200,seattle,WA
 
                     Leads:
-                    carol, johnson, 234 2nd ave, 67
-                    frank, jones, 234 2nd ave, 23
-                    alice, smith, 123 main st, 45
-                    dave, smith, 123 main st, 43
-                    eve, smith, 234 2nd ave, 25
-                    bob, williams, 234 2nd ave, 26""";
+                    carol, johnson, 234 2nd ave, seattle, WA, 67
+                    frank, jones, 234 2nd ave, tacoma, FL, 23
+                    alice, smith, 123 main st, seattle, WA, 45
+                    dave, smith, 123 main st, seattle, WA, 43
+                    eve, smith, 234 2nd ave, tacoma, WA, 25
+                    bob, williams, 234 2nd ave, tacoma, WA, 26""";
 
     @Test
     void contextLoads() {

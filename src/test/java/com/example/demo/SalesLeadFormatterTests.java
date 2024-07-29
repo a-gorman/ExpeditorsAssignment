@@ -32,6 +32,6 @@ public class SalesLeadFormatterTests {
 
         var result = formatter.WriteLeadsToString(input);
 
-        assertThat(result).isEqualTo("Dave, Smith, 123 main st, 43\nAlice, Smith, 123 main st, 45");
+        assertThat(result).isEqualTo("Dave, Smith, 123 main st, seattle, WA, 43\nAlice, Smith, 123 main st, seattle, WA, 45");
     }
 }

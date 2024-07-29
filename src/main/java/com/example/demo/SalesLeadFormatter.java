@@ -22,7 +22,13 @@ public class SalesLeadFormatter {
     // Formats leads into a single string
     public String WriteLeadsToString(List<SalesLead> leads) {
         return leads.stream()
-                .map(l -> String.format("%s, %s, %s, %d", l.givenName(), l.surname(), l.streetAddress(), l.ageInYears()))
+                .map(l -> String.format("%s, %s, %s, %s, %s, %d",
+                        l.givenName(),
+                        l.surname(),
+                        l.streetAddress(),
+                        l.city(),
+                        l.state(),
+                        l.ageInYears()))
                 .collect(Collectors.joining("\n"));
     }
 }
