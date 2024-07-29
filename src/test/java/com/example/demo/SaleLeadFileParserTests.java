@@ -1,7 +1,10 @@
 package com.example.demo;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -26,7 +29,7 @@ public class SaleLeadFileParserTests {
         var input = String.format("\"%1$s\",\"Smith\",\"123 main st.\",\"seattle\",\"wa\",\"43\"", nameInput).lines();
 
         var result = new SalesLeadFileParser().parse(input);
-        assertThat(expectedValue).isEqualTo(result.get(0).firstName());
+        assertThat(expectedValue).isEqualTo(result.get(0).givenName());
     }
 
     @ParameterizedTest
@@ -41,7 +44,7 @@ public class SaleLeadFileParserTests {
         var input = String.format("\"Dave\",\"%1$s\",\"123 main st.\",\"seattle\",\"wa\",\"43\"", nameInput).lines();
 
         var result = new SalesLeadFileParser().parse(input);
-        assertThat(expectedValue).isEqualTo(result.get(0).lastName());
+        assertThat(expectedValue).isEqualTo(result.get(0).surname());
     }
 
     // There are certainly many types of pathological inputs we could imagine that will break our parser (ex. repeated
@@ -103,5 +106,23 @@ public class SaleLeadFileParserTests {
 
         var result = new SalesLeadFileParser().parse(input);
         assertThat(expectedValue).isEqualTo(result.get(0).ageInYears());
+    }
+
+    @Test
+    public void Parser_Can_ParseMultipleItems() {
+        var nItems = 3;
+        var input = IntStream.range(0,nItems)
+                .mapToObj(i -> String.format("\"given%1$d\",\"surname%1$d\",\"address%1$d\",\"city%1$d\",\"state%1$d\",\"%1$d\"", i));
+
+        var result = new SalesLeadFileParser().parse(input);
+        for (var i : IntStream.range(0,nItems).boxed().toList()) {
+            assertThat(String.format("given%1$d", i)).isEqualTo(result.get(i).givenName());
+            assertThat(String.format("surname%1$d", i)).isEqualTo(result.get(i).surname());
+            assertThat(String.format("address%1$d", i)).isEqualTo(result.get(i).streetAddress());
+            assertThat(String.format("city%1$d", i)).isEqualTo(result.get(i).city());
+            assertThat(String.format("STATE%1$d", i)).isEqualTo(result.get(i).state());
+            assertThat(i).isEqualTo(result.get(i).ageInYears());
+        }
+
     }
 }

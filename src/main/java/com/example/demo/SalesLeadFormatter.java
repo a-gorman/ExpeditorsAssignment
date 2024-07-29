@@ -2,6 +2,7 @@ package com.example.demo;
 
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,8 +21,8 @@ public class SalesLeadFormatter {
     }
 
     // Formats leads into a single string
-    public String WriteLeadsToString(Stream<SalesLead> leads) {
-        return leads
+    public String WriteLeadsToString(List<SalesLead> leads) {
+        return leads.stream()
                 .map(l -> String.format("%s, %s, %s, %d", l.givenName(), l.surname(), l.streetAddress(), l.ageInYears()))
                 .collect(Collectors.joining("\n"));
     }
