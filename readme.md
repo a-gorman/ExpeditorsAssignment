@@ -3,17 +3,22 @@
 This project is created to complete an interview exercise for Expediters. The prompt is listed below.
 
 In this project I decided to create a simple Spring Boot project to demonstrate how I might create a simple module in
-an enterprise web-server code base. I use comments to provide commentary calling attention to places where a "real"
+an enterprise web-server code base. I use comments to provide commentary, such as calling attention to places where a "real"
 integrated module could benefit from additional effort or complexity, but have elided such effort in the context of this
 exercise. Normally I would not add nearly so many comments!
 
 # How to run
 
 The program is a command line program with the following interface:
+
 Arg0: Indicates if the first argument should be parsed, or if it takes a csv file to be parsed instead.
+
 Arg1: Function depends on arg0:
+
     -f: File path to input file that must be parsed. This argument is required. The file must be a CSV in the form given in the assignment prompt.
+
     -s: Input is a string to be parsed directly. Must be in CSV in the form given in the assignment prompt.
+
 Arg2: Output file path. This argument is optional. If not provided, the output is sent to the terminal.
 
 ## Quick start with IntelliJ
